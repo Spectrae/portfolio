@@ -4,7 +4,8 @@ import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Experience from '@/components/Timeline';
 import Projects from '@/components/Projects';
-import Certifications from '@/components/Certifications'; // 1. Imported the new component
+import Certifications from '@/components/Certifications';
+import GithubActivity from '@/components/GithubActivity'; // 1. Import
 import Contact from '@/components/Contact';
 
 export default function Home() {
@@ -15,7 +16,8 @@ export default function Home() {
       <Skills />
       <Experience />
       <Projects />
-      <Certifications /> {/* 2. Added the new section here */}
+      <Certifications />
+      <GithubActivity /> {/* 2. Add here */}
       <Contact />
     </div>
   );

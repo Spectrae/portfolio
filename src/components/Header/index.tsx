@@ -29,16 +29,10 @@ const Header = () => {
     <>
       <header
         className={`fixed top-4 left-1/2 z-50 w-[90%] max-w-3xl -translate-x-1/2 transform rounded-full border-white/20 px-6 py-3 transition-all duration-300
-        ${
-          isScrolled
-            ? 'glass-effect shadow-lg'
-            : 'border-transparent'
-        }`}
+        ${isScrolled ? 'glass-effect shadow-lg' : 'border-transparent'}
+      `}
       >
         <nav className="flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold">
-            <span className="text-primary">Dev</span>Portfolio
-          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden items-center gap-6 md:flex">
@@ -51,23 +45,24 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
-            <ThemeToggle />
           </div>
 
-          {/* Mobile Nav Toggle */}
-          <div className="flex items-center md:hidden">
+          {/* Right side controls */}
+          <div className="flex items-center gap-4">
             <ThemeToggle />
+
+            {/* Mobile Nav Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open navigation menu"
-              className="ml-2 p-2"
+              className="p-2 md:hidden"
             >
               <FiMenu size={20} />
             </button>
           </div>
         </nav>
       </header>
-      
+
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}

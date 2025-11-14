@@ -1,4 +1,3 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -7,6 +6,14 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com', // <-- 1. ADD THIS BLOCK
+      },
+      {
+        protocol: 'https',
+        hostname: 'ghchart.rshah.org',
       },
     ],
   },

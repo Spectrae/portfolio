@@ -1,4 +1,16 @@
 /* src/styles/globals.css */
+
+/* 1. Added smooth scrolling rules */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+/* ----- */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono&display=swap');
 
 @tailwind base;

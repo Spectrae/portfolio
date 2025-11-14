@@ -11,10 +11,7 @@ export const ThemeToggle = () => {
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) {
-    // Render a placeholder or null to avoid hydration mismatch
-    return <div className="h-6 w-6" />;
-  }
+  if (!mounted) return <div className="h-6 w-6" />;
 
   const isDark = theme === 'dark';
 

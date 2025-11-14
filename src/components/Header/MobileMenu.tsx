@@ -46,6 +46,7 @@ export const MobileMenu = ({ isOpen, onClose, links }: MobileMenuProps) => {
                       <Dialog.Title className="text-lg font-medium">
                         Menu
                       </Dialog.Title>
+
                       <button
                         type="button"
                         className="rounded-md p-1"
@@ -55,6 +56,7 @@ export const MobileMenu = ({ isOpen, onClose, links }: MobileMenuProps) => {
                         <FiX size={24} />
                       </button>
                     </div>
+
                     <div className="mt-6">
                       <nav className="flex flex-col gap-4">
                         {links.map((link) => (

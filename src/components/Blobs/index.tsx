@@ -1,12 +1,13 @@
-// src/components/Blobs/index.tsx
+'use client';
+
 import styles from '@/styles/blobs.module.css';
 
 const Blobs = () => {
   return (
-    <div className={styles.blobContainer}>
-      <div className={`${styles.blob} ${styles.blob1}`}></div>
-      <div className={`${styles.blob} ${styles.blob2}`}></div>
-      <div className={`${styles.blob} ${styles.blob3}`}></div>
+    <div className={styles.wrapper}>
+      <div className={`${styles.blob} ${styles.blob1}`} />
+      <div className={`${styles.blob} ${styles.blob2}`} />
+      <div className={`${styles.blob} ${styles.blob3}`} />
     </div>
   );
 };

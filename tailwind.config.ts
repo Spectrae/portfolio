@@ -11,7 +11,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Modernized color palette
+        /**
+         * GLOBAL COLOR TOKENS (Fix for bg-gradient-to-r from-primary)
+         * -----------------------------------------------------------
+         * These tokens ensure components like Hero can use:
+         *   from-primary
+         *   to-primary
+         *   text-primary
+         */
+        primary: '#6366f1', // Indigo-500 (beautiful gradient-friendly)
+        'primary-foreground': '#ffffff',
+
+        /**
+         * LIGHT MODE PALETTE
+         */
         light: {
           background: '#F8F9FA',
           foreground: '#212529',
@@ -20,6 +33,10 @@ const config: Config = {
           primary: '#007BFF',
           'primary-foreground': '#FFFFFF',
         },
+
+        /**
+         * DARK MODE PALETTE
+         */
         dark: {
           background: '#0D1117',
           foreground: '#C9D1D9',
@@ -29,16 +46,19 @@ const config: Config = {
           'primary-foreground': '#0D1117',
         },
       },
+
       fontFamily: {
         sans: ['var(--font-inter)', 'sans-serif'],
         mono: ['var(--font-roboto-mono)', 'monospace'],
       },
+
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out forwards',
         'slide-in': 'slideIn 0.5s ease-out forwards',
         'infinite-spin': 'spin 20s linear infinite',
         'slow-pulse': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
+
       keyframes: {
         fadeIn: {
           '0%': { opacity: '0', transform: 'translateY(10px)' },
@@ -49,11 +69,14 @@ const config: Config = {
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
       },
+
       backdropBlur: {
         xs: '2px',
       },
     },
   },
+
   plugins: [require('tailwindcss-animate')],
 };
+
 export default config;

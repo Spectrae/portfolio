@@ -1,43 +1,63 @@
 // src/components/Projects/index.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { projectData } from '@/data/projects';
 import { ProjectCard } from './ProjectCard';
-import { FiChevronDown } from 'react-icons/fi';
-import { motion } from 'framer-motion';
-
-const INITIAL_SHOW = 4;
+import ProjectsToolbar from './ProjectsToolbar';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Projects = () => {
-  const [showAll, setShowAll] = useState(false);
-  const projectsToShow = showAll ? projectData : projectData.slice(0, INITIAL_SHOW);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+
+  // Get all unique categories from the project data
+  const categories = useMemo(() => {
+    const allTech = projectData.flatMap((p) => p.tech);
+    const uniqueTech = [...new Set(allTech)];
+    // Optional: Manually define the order or prominent categories
+    // For this, we'll just use a few common ones
+    return [
+      'Next.js',
+      'Rust',
+      'TypeScript',
+      'Solidity',
+      'Python',
+    ].filter((cat) => uniqueTech.includes(cat));
+  }, []);
+
+  // Filter projects based on the selected category
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === 'All') {
+      return projectData;
+    }
+    return projectData.filter((p) => p.tech.includes(selectedCategory));
+  }, [selectedCategory]);
 
   return (
     <section id="projects" className="py-24">
       <h2 className="mb-12 text-center text-4xl font-bold">Projects</h2>
-      
-      <motion.div 
-        layout 
+
+      <ProjectsToolbar
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onSelectCategory={setSelectedCategory}
+      />
+
+      <motion.div
+        layout
         className="grid grid-cols-1 gap-8 md:grid-cols-2"
       >
-        {projectsToShow.map((project, index) => (
-          <ProjectCard key={index} project={project} />
-        ))}
+        <AnimatePresence>
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} />
+          ))}
+        </AnimatePresence>
       </motion.div>
 
-      {projectData.length > INITIAL_SHOW && (
-        <div className="mt-12 text-center">
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="group flex items-center justify-center gap-2 rounded-full border border-light-primary px-6 py-3 font-semibold text-light-primary transition-colors hover:bg-light-primary/10 dark:border-dark-primary dark:text-dark-primary dark:hover:bg-dark-primary/10"
-          >
-            <span>{showAll ? 'Show Less' : 'Show More'}</span>
-            <FiChevronDown
-              className={`transition-transform ${showAll ? 'rotate-180' : ''}`}
-            />
-          </button>
-        </div>
+      {filteredProjects.length === 0 && (
+         <div className="mt-8 text-center text-light-foreground/70 dark:text-dark-foreground/70">
+           <p>No projects found for this category.</p>
+         </div>
       )}
     </section>
   );
