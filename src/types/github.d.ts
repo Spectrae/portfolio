@@ -14,14 +14,14 @@ export interface GitHubEvent {
   created_at: string;
 }
 
-/* PushEvent payload */
+/* PushEvent Payload */
 export interface GitHubPushPayload {
   commits?: {
     message: string;
   }[];
 }
 
-/* PullRequestEvent payload */
+/* PullRequestEvent Payload */
 export interface GitHubPullRequestPayload {
   action: string;
   pull_request?: {
@@ -30,13 +30,13 @@ export interface GitHubPullRequestPayload {
   };
 }
 
-/* CreateEvent payload */
+/* CreateEvent Payload (repo/branch creation) */
 export interface GitHubCreatePayload {
   ref_type: string;
   ref: string | null;
 }
 
-/* WatchEvent payload */
+/* WatchEvent Payload (starring a repo) */
 export interface GitHubWatchPayload {
   action: string;
 }
