@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import Blobs from '@/components/Blobs';
-import '../styles/globals.css'; // <--- THIS LINE IS CRITICAL
+import '../styles/globals.css'; // <--- Keep this
 
 const inter = Inter({
   subsets: ['latin'],
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${robotoMono.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider>
           <Blobs />
           <div className="relative z-10 flex min-h-screen flex-col">
             <Header />
