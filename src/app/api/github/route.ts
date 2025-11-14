@@ -1,6 +1,7 @@
 // src/app/api/github/route.ts
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+
 import type {
   GitHubEvent,
   GitHubPushPayload,
@@ -33,7 +34,7 @@ export async function GET(_req: NextRequest) {
   try {
     const res = await fetch(url, {
       headers,
-      next: { revalidate: 600 }, // cache for 10 minutes
+      next: { revalidate: 600 }, // Revalidate cache every 10 minutes
     });
 
     if (!res.ok) {
@@ -47,46 +48,52 @@ export async function GET(_req: NextRequest) {
 
     const filtered = events
       .filter((e) =>
-        ['PushEvent', 'PullRequestEvent', 'WatchEvent', 'CreateEvent'].includes(
-          e.type
-        )
+        ['PushEvent', 'PullRequestEvent', 'WatchEvent', 'CreateEvent'].includes(e.type)
       )
       .map((e) => {
         let payload: any = {};
 
-        // PushEvent → commits
-        if (e.type === 'PushEvent') {
-          const p = e.payload as GitHubPushPayload;
-          payload.commits = p.commits?.map((c) => ({ message: c.message })) ?? [];
-        }
+        switch (e.type) {
+          case 'PushEvent': {
+            const p = e.payload as GitHubPushPayload;
+            payload = {
+              commits: p.commits?.map((c) => ({ message: c.message })) ?? [],
+            };
+            break;
+          }
 
-        // PullRequestEvent → PR info
-        if (e.type === 'PullRequestEvent') {
-          const p = e.payload as GitHubPullRequestPayload;
-          payload.action = p.action;
-          payload.title = p.pull_request?.title;
-          payload.merged = p.pull_request?.merged;
-        }
+          case 'PullRequestEvent': {
+            const p = e.payload as GitHubPullRequestPayload;
+            payload = {
+              action: p.action,
+              title: p.pull_request?.title,
+              merged: p.pull_request?.merged,
+            };
+            break;
+          }
 
-        // CreateEvent → branch creation etc.
-        if (e.type === 'CreateEvent') {
-          const p = e.payload as GitHubCreatePayload;
-          payload.ref_type = p.ref_type;
-          payload.ref = p.ref;
-        }
+          case 'CreateEvent': {
+            const p = e.payload as GitHubCreatePayload;
+            payload = {
+              ref_type: p.ref_type,
+              ref: p.ref,
+            };
+            break;
+          }
 
-        // WatchEvent → starring repo
-        if (e.type === 'WatchEvent') {
-          const p = e.payload as GitHubWatchPayload;
-          payload.action = p.action;
+          case 'WatchEvent': {
+            const p = e.payload as GitHubWatchPayload;
+            payload = {
+              action: p.action,
+            };
+            break;
+          }
         }
 
         return {
           id: e.id,
           type: e.type,
-          repo: {
-            name: e.repo.name,
-          },
+          repo: { name: e.repo.name },
           actor: {
             login: e.actor.login,
             avatar_url: e.actor.avatar_url,

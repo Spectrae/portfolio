@@ -1,8 +1,15 @@
+// src/types/github.d.ts
+
 export interface GitHubEvent {
   id: string;
   type: string;
-  actor: { login: string; avatar_url: string };
-  repo: { name: string };
+  actor: {
+    login: string;
+    avatar_url: string;
+  };
+  repo: {
+    name: string;
+  };
   payload: any;
   created_at: string;
 }
