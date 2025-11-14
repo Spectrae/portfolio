@@ -1,0 +1,13 @@
+/* src/styles/animations.css */
+/* Using Tailwind's animation config is preferred, but this is here for overrides */
+@layer utilities {
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+}

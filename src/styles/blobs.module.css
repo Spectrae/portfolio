@@ -1,0 +1,59 @@
+/* src/styles/blobs.module.css */
+.blobContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -10;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  filter: blur(80px); /* Tailwind equivalent: blur(4xl) */
+  will-change: transform, opacity;
+}
+
+.blob1 {
+  width: 400px;
+  height: 400px;
+  background-color: #58a6ff; /* dark.primary */
+  animation: blob-animate 15s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite
+    alternate;
+}
+
+.blob2 {
+  width: 300px;
+  height: 300px;
+  background-color: #3fba85;
+  animation: blob-animate 18s cubic-bezier(0.17, 0.67, 0.83, 0.67) infinite
+    alternate-reverse;
+}
+
+.blob3 {
+  width: 250px;
+  height: 250px;
+  background-color: #f7b955;
+  animation: blob-animate 12s cubic-bezier(0.76, 0.05, 0.24, 0.95) infinite
+    alternate;
+}
+
+@keyframes blob-animate {
+  0% {
+    transform: scale(1) translate(0px, 0px);
+  }
+  100% {
+    transform: scale(1.5) translate(150px, -100px);
+  }
+}
+
+/* Ensure animations adapt */
+.blob2 {
+  animation-delay: 3s;
+}
+.blob3 {
+  animation-delay: 6s;
+}
