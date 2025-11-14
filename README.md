@@ -21,4 +21,4 @@ This is a production-ready portfolio website built from scratch using the latest
 
 ```bash
 git clone <your-repo-url>
-cd modern-portfolio-next
+cd modern-portfolio-next# portfolio
