@@ -1,38 +1,41 @@
 // src/components/GithubActivity/index.tsx
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { useTheme } from 'next-themes';
-import { FiGithub } from 'react-icons/fi';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { useTheme } from "next-themes";
+import { FiGithub } from "react-icons/fi";
 
-// Dynamically import GitHubCalendar to avoid SSR hydration errors
-const GitHubCalendar = dynamic(() => import('react-github-calendar'), {
+// Dynamically import to fix SSR hydration issues
+const GitHubCalendar = dynamic(() => import("react-github-calendar"), {
   ssr: false,
 });
 
-const GITHUB_USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME || '';
+const GITHUB_USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "";
 
-const GithubActivity = () => {
+export default function GithubActivity() {
   const { theme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [data, setData] = useState<any>(null);
 
-  // Prevent hydration errors by rendering only after mount
+  // Avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Determine the current theme
-  const currentTheme = theme === 'system' ? resolvedTheme : theme;
+  // Fetch API safely
+  useEffect(() => {
+    fetch("/api/github")
+      .then((res) => res.json())
+      .then((json) => {
+        if (!json || json.error) return; // prevent crash
+        setData(json);
+      })
+      .catch(() => {});
+  }, []);
 
-  // Explicit color themes
-  const explicitTheme = {
-    light: ['hsl(0, 0%, 92%)', '#c6e484', '#7bc96f', '#239a3b', '#196127'],
-    dark: ['hsl(0, 0%, 10%)', '#0e4429', '#006d32', '#26a641', '#39d353'],
-  };
-
-  // Skeleton UI while mounting or theme not resolved
-  if (!mounted || !currentTheme) {
+  // while not mounted
+  if (!mounted) {
     return (
       <section id="github-activity" className="py-24">
         <h2 className="mb-12 text-center text-4xl font-bold">
@@ -43,6 +46,29 @@ const GithubActivity = () => {
     );
   }
 
+  // Ensure username exists
+  if (!GITHUB_USERNAME) return null;
+
+  // Wait for API
+  if (!data) {
+    return (
+      <section id="github-activity" className="py-24">
+        <h2 className="mb-12 text-center text-4xl font-bold">
+          GitHub Contributions
+        </h2>
+        <div className="glass-effect h-48 w-full animate-pulse rounded-xl p-6 shadow-lg" />
+      </section>
+    );
+  }
+
+  // Set theme colors
+  const currentTheme = theme === "system" ? resolvedTheme : theme;
+
+  const explicitTheme = {
+    light: ["hsl(0, 0%, 92%)", "#c6e484", "#7bc96f", "#239a3b", "#196127"],
+    dark: ["hsl(0, 0%, 10%)", "#0e4429", "#006d32", "#26a641", "#39d353"],
+  };
+
   return (
     <section id="github-activity" className="py-24">
       <h2 className="mb-12 text-center text-4xl font-bold">
@@ -50,6 +76,7 @@ const GithubActivity = () => {
       </h2>
 
       <div className="glass-effect flex flex-col items-center gap-6 rounded-xl p-6 shadow-lg">
+        {/* Contribution calendar */}
         <GitHubCalendar
           username={GITHUB_USERNAME}
           blockSize={14}
@@ -61,6 +88,7 @@ const GithubActivity = () => {
           hideColorLegend
         />
 
+        {/* View on GitHub button */}
         <a
           href={`https://github.com/${GITHUB_USERNAME}`}
           target="_blank"
@@ -73,6 +101,4 @@ const GithubActivity = () => {
       </div>
     </section>
   );
-};
-
-export default GithubActivity;
+}

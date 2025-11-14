@@ -5,7 +5,7 @@ import Skills from '@/components/Skills';
 import Experience from '@/components/Timeline';
 import Projects from '@/components/Projects';
 import Certifications from '@/components/Certifications';
-import GithubActivity from '@/components/GithubActivity'; // 1. Import
+import GithubActivity from '@/components/GithubActivity'; // Correct import
 import Contact from '@/components/Contact';
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
       <Experience />
       <Projects />
       <Certifications />
-      <GithubActivity /> {/* 2. Add here */}
+      <GithubActivity /> {/* Correct placement */}
       <Contact />
     </div>
   );
