@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       subject: `New Message from ${name} via Portfolio`,
       
       // --- THIS IS THE FIX ---
-      reply_to: [email], 
+      replyTo: [email], 
       
       react: ContactEmail({
         name,
