@@ -2,9 +2,9 @@
 import { FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
 
 const socials = [
-  { href: '#', icon: FiGithub, label: 'GitHub' },
-  { href: '#', icon: FiLinkedin, label: 'LinkedIn' },
-  { href: '#', icon: FiTwitter, label: 'Twitter' },
+  { href: 'https://github.com/Spectrae', icon: FiGithub, label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/rickmondal2004/', icon: FiLinkedin, label: 'LinkedIn' },
+  { href: 'https://x.com/imrickmondal', icon: FiTwitter, label: 'Twitter' },
 ];
 
 const Footer = () => {

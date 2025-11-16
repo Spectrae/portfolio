@@ -2,9 +2,9 @@
 import { FiGithub, FiLinkedin, FiTwitter, FiArrowDown } from 'react-icons/fi';
 
 const socials = [
-  { href: '#', icon: FiGithub, label: 'GitHub' },
-  { href: '#', icon: FiLinkedin, label: 'LinkedIn' },
-  { href: '#', icon: FiTwitter, label: 'Twitter' },
+  { href: 'https://github.com/Spectrae', icon: FiGithub, label: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/rickmondal2004/', icon: FiLinkedin, label: 'LinkedIn' },
+  { href: 'https://x.com/imrickmondal', icon: FiTwitter, label: 'Twitter' },
 ];
 
 const Hero = () => {
@@ -18,19 +18,29 @@ const Hero = () => {
           Rick Mondal
         </span>
       </h1>
+
       <p className="mt-4 text-xl text-light-foreground/80 dark:text-dark-foreground/80 md:text-2xl">
         Full-Stack Developer
       </p>
 
+      {/* BUTTONS */}
       <div className="mt-8 flex flex-wrap justify-center gap-4">
-        <button className="rounded-full bg-light-primary px-6 py-3 font-semibold text-light-primary-foreground shadow-lg transition-transform hover:scale-105 dark:bg-dark-primary dark:text-dark-primary-foreground">
+        <a
+          href="#projects"
+          className="rounded-full bg-light-primary px-6 py-3 font-semibold text-light-primary-foreground shadow-lg transition-transform hover:scale-105 dark:bg-dark-primary dark:text-dark-primary-foreground"
+        >
           View My Work
-        </button>
-        <button className="rounded-full border border-light-primary bg-transparent px-6 py-3 font-semibold text-light-primary transition-transform hover:scale-105 hover:bg-light-primary/10 dark:border-dark-primary dark:text-dark-primary dark:hover:bg-dark-primary/10">
+        </a>
+
+        <a
+          href="#contact"
+          className="rounded-full border border-light-primary bg-transparent px-6 py-3 font-semibold text-light-primary transition-transform hover:scale-105 hover:bg-light-primary/10 dark:border-dark-primary dark:text-dark-primary dark:hover:bg-dark-primary/10"
+        >
           Contact Me
-        </button>
+        </a>
       </div>
 
+      {/* SOCIALS */}
       <div className="mt-8 flex gap-6">
         {socials.map((social) => (
           <a
@@ -46,8 +56,9 @@ const Hero = () => {
         ))}
       </div>
 
+      {/* BOUNCING ARROW */}
       <div className="absolute bottom-10 animate-bounce">
-        <FiArrowDown size={24} className="text-light-foreground/50" />
+        <FiArrowDown size={24} className="text-light-foreground/50 dark:text-dark-foreground/50" />
       </div>
     </section>
   );
