@@ -1,139 +1,237 @@
-Modern Next.js Portfolio
+# 🚀 Modern Next.js Portfolio
 
-This is a production-ready portfolio website built from scratch using the latest web technologies, including Next.js, TypeScript, and Tailwind CSS. It features a modern design, dark mode, animations, and a component-based architecture.
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=nextdotjs)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3-38BDF8?logo=tailwindcss)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)
+![Status](https://img.shields.io/badge/Status-Production_Ready-success)
 
-✨ Features
+A fully production-grade **Next.js 14 Portfolio** built with **TypeScript**, **Tailwind CSS**, animations, dark mode, APIs, and reusable components.
+Flexible, fast, and optimized for real-world deployment.
 
-Next.js 14 (App Router)
+---
 
-TypeScript
+# 📁 Project Folder Structure
 
-Tailwind CSS
+```plaintext
+portfolio/
+├── public/                     # Static assets (images, icons, favicons)
+│
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/
+│   │   │   └── github/route.ts # GitHub activity API route
+│   │   ├── layout.tsx          # Root layout
+│   │   └── page.tsx            # Home page
+│   │
+│   ├── components/             # Reusable UI components
+│   │   ├── navbar/             # Navigation bar components
+│   │   ├── footer/             # Footer
+│   │   ├── theme/              # Dark mode toggle
+│   │   ├── sections/           # Home sections (Hero, About, Projects, etc.)
+│   │   └── ui/                 # Buttons, cards, modals, effects
+│   │
+│   ├── data/                   # Editable data files
+│   │   ├── projects.ts         # Project entries
+│   │   ├── timeline.ts         # Experience timeline
+│   │   └── certifications.ts   # Certifications list
+│   │
+│   ├── lib/                    # Utility functions
+│   │   └── github.ts           # GitHub API helpers
+│   │
+│   └── styles/                 # Global styles
+│       └── globals.css
+│
+├── tests/                      # Jest + Playwright test files
+│
+├── .env.local                  # Environment variables (GitHub Username)
+├── package.json
+├── pnpm-lock.yaml
+├── tailwind.config.ts
+├── tsconfig.json
+└── README.md
+```
 
-Light / Dark Mode (with next-themes)
+---
 
-Modern UI/UX (Glassmorphism, Gradients, Animations)
+# ✨ Features
 
-Project Filtering (Client-side)
+* ⚡ **Next.js 14 App Router**
+* 🟦 **TypeScript**
+* 🎨 **Tailwind CSS + Animations**
+* 🌙 **Dark / Light mode (next-themes)**
+* 🧩 **Modular components**
+* 🎯 **Project filtering**
+* 📊 **GitHub activity feed**
+* 📱 **Fully responsive**
+* 🔍 **SEO optimized**
+* 📬 **Contact form (API route)**
+* 🧪 **Testing (Jest + Playwright)**
 
-GitHub Activity Feed (via API route)
+---
 
-Reusable Components
+# 🚀 Getting Started
 
-Fully Responsive
+## 1️⃣ Clone the Repository
 
-SEO Optimized
-
-Contact Form (API Route)
-
-Testing (Jest, React Testing Library, Playwright)
-
-🚀 Getting Started
-
-1. Clone the Repository
-
-git clone [https://github.com/Spectrae/portfolio](https://github.com/Spectrae/portfolio)
+```bash
+git clone https://github.com/Spectrae/portfolio
 cd portfolio
+```
 
+---
 
-2. Create Environment File
+## 2️⃣ Create `.env.local`
 
-You must create a .env.local file in the root of the project for the GitHub feed to work.
-
+```bash
 touch .env.local
+```
 
+Add your GitHub username:
 
-Then, open the .env.local file and add your GitHub username:
+```bash
+NEXT_PUBLIC_GITHUB_USERNAME="your-github-username"
 
-# .env.local
-NEXT_PUBLIC_GITHUB_USERNAME="your-github-username-here"
+# Optional for higher rate limits:
+# GITHUB_TOKEN="your_token_here"
+```
 
-# Optional: Create a GitHub token for better API rate limits
-# GITHUB_TOKEN="your-github-token-here"
+---
 
+## 3️⃣ Install Dependencies (pnpm)
 
-3. Install Dependencies
-
-This project uses pnpm.
-
+```bash
 pnpm install
+```
 
+---
 
-4. Run the Development Server
+## 4️⃣ Start Development Server
 
+```bash
 pnpm dev
+```
 
+Visit:
+➡ [http://localhost:3000](http://localhost:3000)
 
-Open http://localhost:3000 with your browser to see the result.
+---
 
-📝 Adding/Editing Content
+# 📝 How to Customize
 
-This project is designed to be easily customizable.
+## 🧩 Add or Edit Projects
 
-Adding Projects
+Edit:
 
-To add, edit, or remove projects from the Projects grid:
+```
+src/data/projects.ts
+```
 
-Open src/data/projects.ts.
+Add:
 
-Follow the Project interface to add your own project data.
+* name
+* description
+* tags
+* GitHub URL
+* Live URL
+* image URL
 
-Upload your project images to an image hosting service (like Cloudinary or Vercel) and update the image URL.
+---
 
-Adding Experience
+## 🕒 Edit Experience
 
-To update the Experience Timeline:
+```
+src/data/timeline.ts
+```
 
-Open src/data/timeline.ts.
+Modify your:
 
-Follow the TimelineEntry interface to add your career or education history.
+* titles
+* companies
+* dates
+* descriptions
 
-Adding Certifications
+---
 
-To update the Certifications section:
+## 📜 Update Certifications
 
-Open src/data/certifications.ts.
+```
+src/data/certifications.ts
+```
 
-Follow the Certification interface. You can add any icon from the react-icons library.
+Supports any `react-icons` icon.
 
-🧪 Running Tests
+---
 
-Unit Tests
+# 🧪 Testing
 
-Unit tests are run using Jest and React Testing Library.
+### Unit Tests (Jest + RTL)
 
+```bash
 pnpm test
+```
 
+### End-to-End Tests (Playwright)
 
-End-to-End (E2E) Tests
+Run dev server:
 
-E2E tests are run using Playwright.
-
-# First, make sure your dev server is running
+```bash
 pnpm dev
+```
 
-# Run E2E tests in a separate terminal
+Then:
+
+```bash
 pnpm test:e2e
+```
 
+---
 
-🌐 Deployment
+# 🌐 Deployment (Vercel)
 
-This project is optimized for deployment on Vercel.
+Optimized for **one-click Vercel deployment**.
 
-Push your code to a GitHub repository.
+### Steps:
 
-Import the repository into your Vercel dashboard.
+1. Push repo to GitHub
+2. Import into Vercel
+3. Add environment variables:
 
-Vercel will automatically detect the Next.js framework.
+```
+NEXT_PUBLIC_GITHUB_USERNAME
+GITHUB_TOKEN (optional)
+```
 
-Important: You must add your NEXT_PUBLIC_GITHUB_USERNAME and (optional) GITHUB_TOKEN as Environment Variables in the Vercel project settings.
+4. Deploy 🎉
 
-Deploy!
+---
 
-GitHub Activity
+# 📊 GitHub Activity API
 
-Requires env: NEXT_PUBLIC_GITHUB_USERNAME
+**Route:**
 
-Optional: GITHUB_TOKEN (to increase rate limit)
+```
+/api/github
+```
 
-API route: /api/github (cached 10 minutes via fetch(..., next: { revalidate: 600 }))
+**Caching:**
+`10 minutes` via:
+
+```ts
+fetch(url, { next: { revalidate: 600 } })
+```
+
+---
+
+# 📄 License
+
+Licensed under the **MIT License**.
+
+---
+
+# 🤝 Contributing
+
+Pull requests are welcome.
+Open an issue if you'd like to request a feature or report a bug.
