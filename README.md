@@ -9,7 +9,7 @@
 ![Status](https://img.shields.io/badge/Status-Production_Ready-success)
 
 A fully production-grade **Next.js 14 Portfolio** built with **TypeScript**, **Tailwind CSS**, animations, dark mode, APIs, and reusable components.
-Flexible, fast, and optimized for real-world deployment.
+Fast, scalable, modern, and optimized for real-world deployment.
 
 ---
 
@@ -30,23 +30,23 @@ portfolio/
 │   │   ├── navbar/             # Navigation bar components
 │   │   ├── footer/             # Footer
 │   │   ├── theme/              # Dark mode toggle
-│   │   ├── sections/           # Home sections (Hero, About, Projects, etc.)
+│   │   ├── sections/           # Main sections (Hero, About, Projects, etc.)
 │   │   └── ui/                 # Buttons, cards, modals, effects
 │   │
 │   ├── data/                   # Editable data files
-│   │   ├── projects.ts         # Project entries
+│   │   ├── projects.ts         # Projects list
 │   │   ├── timeline.ts         # Experience timeline
 │   │   └── certifications.ts   # Certifications list
 │   │
 │   ├── lib/                    # Utility functions
-│   │   └── github.ts           # GitHub API helpers
+│   │   └── github.ts           # GitHub API helper
 │   │
 │   └── styles/                 # Global styles
 │       └── globals.css
 │
 ├── tests/                      # Jest + Playwright test files
 │
-├── .env.local                  # Environment variables (GitHub Username)
+├── .env.local                  # Environment variables
 ├── package.json
 ├── pnpm-lock.yaml
 ├── tailwind.config.ts
@@ -59,16 +59,16 @@ portfolio/
 # ✨ Features
 
 * ⚡ **Next.js 14 App Router**
-* 🟦 **TypeScript**
-* 🎨 **Tailwind CSS + Animations**
-* 🌙 **Dark / Light mode (next-themes)**
+* 🟦 **TypeScript-first codebase**
+* 🎨 **Tailwind CSS + animations**
+* 🌙 **Dark/Light mode with next-themes**
 * 🧩 **Modular components**
 * 🎯 **Project filtering**
 * 📊 **GitHub activity feed**
 * 📱 **Fully responsive**
 * 🔍 **SEO optimized**
-* 📬 **Contact form (API route)**
-* 🧪 **Testing (Jest + Playwright)**
+* 📬 **Contact form using API route**
+* 🧪 **Testing with Jest + Playwright**
 
 ---
 
@@ -83,24 +83,28 @@ cd portfolio
 
 ---
 
-## 2️⃣ Create `.env.local`
+## 2️⃣ Add Environment Variables
+
+Create:
 
 ```bash
 touch .env.local
 ```
 
-Add your GitHub username:
+Add:
 
 ```bash
 NEXT_PUBLIC_GITHUB_USERNAME="your-github-username"
 
-# Optional for higher rate limits:
-# GITHUB_TOKEN="your_token_here"
+# Optional (recommended):
+# GITHUB_TOKEN="your-token"
 ```
 
 ---
 
-## 3️⃣ Install Dependencies (pnpm)
+## 3️⃣ Install Dependencies
+
+Using **pnpm**:
 
 ```bash
 pnpm install
@@ -114,74 +118,28 @@ pnpm install
 pnpm dev
 ```
 
-Visit:
+Check output at:
 ➡ [http://localhost:3000](http://localhost:3000)
-
----
-
-# 📝 How to Customize
-
-## 🧩 Add or Edit Projects
-
-Edit:
-
-```
-src/data/projects.ts
-```
-
-Add:
-
-* name
-* description
-* tags
-* GitHub URL
-* Live URL
-* image URL
-
----
-
-## 🕒 Edit Experience
-
-```
-src/data/timeline.ts
-```
-
-Modify your:
-
-* titles
-* companies
-* dates
-* descriptions
-
----
-
-## 📜 Update Certifications
-
-```
-src/data/certifications.ts
-```
-
-Supports any `react-icons` icon.
 
 ---
 
 # 🧪 Testing
 
-### Unit Tests (Jest + RTL)
+### Unit Tests (Jest)
 
 ```bash
 pnpm test
 ```
 
-### End-to-End Tests (Playwright)
+### E2E Tests (Playwright)
 
-Run dev server:
+Start dev server:
 
 ```bash
 pnpm dev
 ```
 
-Then:
+Run in another terminal:
 
 ```bash
 pnpm test:e2e
@@ -191,11 +149,11 @@ pnpm test:e2e
 
 # 🌐 Deployment (Vercel)
 
-Optimized for **one-click Vercel deployment**.
+This project is 100% optimized for **Vercel**.
 
 ### Steps:
 
-1. Push repo to GitHub
+1. Push code to GitHub
 2. Import into Vercel
 3. Add environment variables:
 
@@ -204,7 +162,7 @@ NEXT_PUBLIC_GITHUB_USERNAME
 GITHUB_TOKEN (optional)
 ```
 
-4. Deploy 🎉
+4. Deploy 🚀
 
 ---
 
@@ -216,8 +174,8 @@ GITHUB_TOKEN (optional)
 /api/github
 ```
 
-**Caching:**
-`10 minutes` via:
+**Cache:**
+Revalidated every **10 minutes**:
 
 ```ts
 fetch(url, { next: { revalidate: 600 } })
@@ -227,11 +185,10 @@ fetch(url, { next: { revalidate: 600 } })
 
 # 📄 License
 
-Licensed under the **MIT License**.
+This project is licensed under the **MIT License**.
 
 ---
 
 # 🤝 Contributing
 
-Pull requests are welcome.
-Open an issue if you'd like to request a feature or report a bug.
+Contributions, issues, and PRs are welcome!
