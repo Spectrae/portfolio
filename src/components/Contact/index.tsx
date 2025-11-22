@@ -1,138 +1,105 @@
 // src/components/Contact/index.tsx
 'use client';
 
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { FiSend } from 'react-icons/fi';
+import { useState } from 'react';
+import { Button } from '@/components/ui/Button';
+import { FiSend, FiCheck, FiAlertCircle } from 'react-icons/fi';
 
-const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
+const schema = z.object({
+  name: z.string().min(2, 'Name is too short'),
   email: z.string().email('Invalid email address'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
-type ContactFormInputs = z.infer<typeof contactSchema>;
+type FormData = z.infer<typeof schema>;
 
 const Contact = () => {
-  const [formStatus, setFormStatus] = useState<{
-    success: boolean;
-    message: string;
-  } | null>(null);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-  } = useForm<ContactFormInputs>({
-    resolver: zodResolver(contactSchema),
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
+    resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data: ContactFormInputs) => {
-    setFormStatus(null);
+  const onSubmit = async (data: FormData) => {
+    setStatus('submitting');
     try {
-      const response = await fetch('/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
       });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || 'Something went wrong');
-      }
-
-      setFormStatus({ success: true, message: result.message });
+      if (!res.ok) throw new Error();
+      setStatus('success');
       reset();
-    } catch (error: any) {
-      setFormStatus({ success: false, message: error.message });
+    } catch (e) {
+      setStatus('error');
     }
   };
 
   return (
-    <section id="contact" className="py-24">
-      <h2 className="mb-12 text-center text-4xl font-bold">Get In Touch</h2>
-      <div className="mx-auto max-w-lg rounded-xl bg-light-card p-8 shadow-xl dark:bg-dark-card">
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Name Field */}
-          <div>
-            <label htmlFor="name" className="mb-1 block font-medium">
-              Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              {...register('name')}
-              className="w-full rounded-md border border-light-foreground/20 bg-transparent p-3 dark:border-dark-foreground/20"
-              aria-invalid={errors.name ? 'true' : 'false'}
-            />
-            {errors.name && (
-              <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
-            )}
+    <section id="contact" className="py-24 relative overflow-hidden">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="glass-effect rounded-3xl p-8 md:p-12 shadow-2xl">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold md:text-4xl mb-4">Get In Touch</h2>
+            <p className="text-muted-foreground">
+              Have a project in mind or want to discuss low-level systems? Drop me a message.
+            </p>
           </div>
 
-          {/* Email Field */}
-          <div>
-            <label htmlFor="email" className="mb-1 block font-medium">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              {...register('email')}
-              className="w-full rounded-md border border-light-foreground/20 bg-transparent p-3 dark:border-dark-foreground/20"
-              aria-invalid={errors.email ? 'true' : 'false'}
-            />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-            )}
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-medium ml-1">Name</label>
+                <input
+                  {...register('name')}
+                  className="w-full rounded-xl border border-muted bg-background/50 px-4 py-3 transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                  placeholder="John Doe"
+                />
+                {errors.name && <span className="text-xs text-red-500">{errors.name.message}</span>}
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium ml-1">Email</label>
+                <input
+                  {...register('email')}
+                  className="w-full rounded-xl border border-muted bg-background/50 px-4 py-3 transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                  placeholder="john@example.com"
+                />
+                {errors.email && <span className="text-xs text-red-500">{errors.email.message}</span>}
+              </div>
+            </div>
 
-          {/* Message Field */}
-          <div>
-            <label htmlFor="message" className="mb-1 block font-medium">
-              Message
-            </label>
-            <textarea
-              id="message"
-              rows={5}
-              {...register('message')}
-              className="w-full rounded-md border border-light-foreground/20 bg-transparent p-3 dark:border-dark-foreground/20"
-              aria-invalid={errors.message ? 'true' : 'false'}
-            />
-            {errors.message && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.message.message}
+            <div className="space-y-2">
+              <label className="text-sm font-medium ml-1">Message</label>
+              <textarea
+                {...register('message')}
+                rows={5}
+                className="w-full rounded-xl border border-muted bg-background/50 px-4 py-3 transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none resize-none"
+                placeholder="Tell me about your project..."
+              />
+              {errors.message && <span className="text-xs text-red-500">{errors.message.message}</span>}
+            </div>
+
+            <Button 
+              type="submit" 
+              disabled={status === 'submitting'} 
+              className="w-full gap-2 text-lg"
+              size="lg"
+            >
+              {status === 'submitting' ? 'Sending...' : status === 'success' ? 'Sent Successfully!' : 'Send Message'}
+              {status === 'success' ? <FiCheck /> : <FiSend />}
+            </Button>
+
+            {status === 'error' && (
+              <p className="flex items-center justify-center gap-2 text-sm text-red-500 bg-red-500/10 p-3 rounded-lg">
+                <FiAlertCircle /> Something went wrong. Please try again.
               </p>
             )}
-          </div>
-
-          {/* Status Banners */}
-          {formStatus && (
-            <div
-              className={`rounded-md p-3 text-center ${
-                formStatus.success
-                  ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200'
-                  : 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200'
-              }`}
-            >
-              {formStatus.message}
-            </div>
-          )}
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-light-primary px-6 py-3 font-semibold text-light-primary-foreground shadow-lg transition-transform hover:scale-105 disabled:opacity-50 dark:bg-dark-primary dark:text-dark-primary-foreground"
-          >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-            <FiSend />
-          </button>
-        </form>
+          </form>
+        </div>
       </div>
     </section>
   );

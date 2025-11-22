@@ -1,19 +1,23 @@
 // src/components/Timeline/index.tsx
+'use client';
+
 import { timelineData } from '@/data/timeline';
 import { TimelineItem } from './TimelineItem';
-import { FiBriefcase } from 'react-icons/fi';
 
-const Experience = () => {
+const Timeline = () => {
   return (
-    <section id="experience" className="py-24">
-      <h2 className="mb-12 text-center text-4xl font-bold">My Journey</h2>
-      <div className="relative mx-auto max-w-2xl">
-        {/* The vertical line */}
-        <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-light-primary/30 dark:bg-dark-primary/30" />
+    <section id="experience" className="py-24 bg-muted/30 relative">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="mb-12 md:text-center">
+          <h2 className="text-3xl font-bold md:text-4xl mb-4">Experience</h2>
+          <p className="text-muted-foreground">
+            My professional journey and key milestones.
+          </p>
+        </div>
 
-        <div className="space-y-12">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {timelineData.map((item, index) => (
-            <TimelineItem key={index} item={item} index={index} />
+            <TimelineItem key={index} item={item} />
           ))}
         </div>
       </div>
@@ -21,4 +25,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default Timeline;

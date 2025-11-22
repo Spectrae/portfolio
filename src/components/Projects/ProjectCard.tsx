@@ -13,54 +13,57 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
-      className="glass-effect group relative overflow-hidden rounded-xl shadow-lg"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      className="group relative flex flex-col overflow-hidden rounded-2xl bg-card border border-white/5 dark:border-white/10 shadow-md transition-all hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1"
     >
-      <Image
-        src={project.image}
-        alt={project.title}
-        width={500}
-        height={300}
-        className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
-      <div className="p-6">
-        <h3 className="mb-2 text-2xl font-semibold">{project.title}</h3>
-        <p className="mb-4 text-sm text-light-foreground/80 dark:text-dark-foreground/80">
+      <div className="relative h-48 w-full overflow-hidden bg-muted">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-60" />
+      </div>
+
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+          {project.title}
+        </h3>
+        
+        <p className="mb-6 line-clamp-3 flex-1 text-sm text-muted-foreground leading-relaxed">
           {project.description}
         </p>
-        <div className="mb-4 flex flex-wrap gap-2">
+
+        <div className="mb-6 flex flex-wrap gap-2">
           {project.tech.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-light-primary/10 px-3 py-1 text-xs font-medium text-light-primary dark:bg-dark-primary/10 dark:text-dark-primary"
+              className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary"
             >
               {tag}
             </span>
           ))}
         </div>
-        <div className="flex gap-4">
+
+        <div className="mt-auto flex gap-4 border-t border-muted pt-4">
           <Link
             href={project.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub repository"
-            className="flex items-center gap-1 transition-colors hover:text-light-primary dark:hover:text-dark-primary"
+            className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            <FiGithub />
-            GitHub
+            <FiGithub className="text-lg" /> Code
           </Link>
           <Link
             href={project.links.demo}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Live demo"
-            className="flex items-center gap-1 transition-colors hover:text-light-primary dark:hover:text-dark-primary"
+            className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
           >
-            <FiExternalLink />
-            Demo
+            <FiExternalLink className="text-lg" /> Live Demo
           </Link>
         </div>
       </div>

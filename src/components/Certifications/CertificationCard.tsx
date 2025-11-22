@@ -1,7 +1,7 @@
 // src/components/Certifications/CertificationCard.tsx
 import { Certification } from '@/data/certifications';
 import Link from 'next/link';
-import { FiExternalLink } from 'react-icons/fi';
+import { FiExternalLink, FiAward } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
 interface CertificationCardProps {
@@ -14,36 +14,32 @@ export const CertificationCard = ({ cert }: CertificationCardProps) => {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="glass-effect group flex items-start gap-4 rounded-xl p-5 shadow-lg"
+      className="glass-effect group flex items-center gap-5 rounded-2xl p-5 shadow-sm transition-all hover:bg-white/80 dark:hover:bg-[#151e32]"
     >
-      {/* Icon */}
-      <div className="flex-shrink-0">
-        <Icon className="h-10 w-10 text-light-primary dark:text-dark-primary" />
+      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
+        {Icon ? <Icon size={28} /> : <FiAward size={28} />}
       </div>
 
-      {/* Details */}
-      <div className="flex-1">
-        <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="text-sm text-light-foreground/80 dark:text-dark-foreground/80">
-          {issuer}
-        </p>
-        <p className="mb-2 text-xs text-light-foreground/60 dark:text-dark-foreground/60">
-          {date}
-        </p>
-        <Link
-          href={credentialLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Verify ${title} credential`}
-          className="flex items-center gap-1 text-sm font-medium text-light-primary transition-colors hover:text-light-primary/80 dark:text-dark-primary dark:hover:text-dark-primary/80"
-        >
-          View Credential
-          <FiExternalLink size={14} />
-        </Link>
+      <div className="flex-1 min-w-0">
+        <h3 className="truncate text-lg font-semibold text-foreground">{title}</h3>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <span>{issuer}</span>
+          <span className="h-1 w-1 rounded-full bg-muted-foreground/50" />
+          <span>{date}</span>
+        </div>
       </div>
+
+      <Link
+        href={credentialLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hidden sm:flex h-10 w-10 items-center justify-center rounded-full border border-muted bg-transparent text-muted-foreground transition-colors hover:bg-primary hover:border-primary hover:text-white"
+        aria-label={`Verify ${title}`}
+      >
+        <FiExternalLink />
+      </Link>
     </motion.div>
   );
 };

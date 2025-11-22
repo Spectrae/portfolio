@@ -1,15 +1,21 @@
 // src/data/certifications.ts
 import { IconType } from 'react-icons';
-// Import icons from react-icons (e.g., FaAws, SiSolidity, etc.)
+
+// Icons
 import { FaAws, FaRust } from 'react-icons/fa';
-import { SiSolidity, SiGoogledrive } from 'react-icons/si'; // 1. Imported a new icon
+import { 
+  SiSolidity, 
+  SiGoogledrive, 
+  SiKaggle,
+  SiIbm
+} from 'react-icons/si';
 
 export interface Certification {
   title: string;
   issuer: string;
   date: string;
   credentialLink: string;
-  Icon: IconType; // This lets you pass an icon component
+  Icon: IconType;
 }
 
 export const certificationData: Certification[] = [
@@ -17,7 +23,7 @@ export const certificationData: Certification[] = [
     title: 'Rust for Systems Programming',
     issuer: 'Linux Foundation',
     date: 'Nov 2025',
-    credentialLink: '#', // Replace '#' with your actual link
+    credentialLink: '#',
     Icon: FaRust,
   },
   {
@@ -34,13 +40,25 @@ export const certificationData: Certification[] = [
     credentialLink: '#',
     Icon: FaAws,
   },
-  // 2. Added the new certification object below
   {
-    title: 'Google Cloud Professional', // Example Title
-    issuer: 'Google Cloud', // Example Issuer
+    title: 'Google Cloud Professional',
+    issuer: 'Google Cloud',
     date: 'Aug 2025',
     credentialLink: '#',
-    Icon: SiGoogledrive, // 3. Used the new icon
+    Icon: SiGoogledrive,
   },
-  // Add more certifications here
+  {
+    title: 'Data Visualization',
+    issuer: 'Kaggle',
+    date: 'Oct 2025',
+    credentialLink: '#',
+    Icon: SiKaggle,
+  },
+  {
+    title: 'Accelerating Deep Learning with GPUs',
+    issuer: 'IBM',
+    date: 'Nov 2025',
+    credentialLink: '#',
+    Icon: SiIbm,
+  },
 ];

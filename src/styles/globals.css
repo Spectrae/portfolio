@@ -1,52 +1,73 @@
 /* src/styles/globals.css */
 
-/* 1. Added smooth scrolling rules */
-html {
-  scroll-behavior: smooth;
-}
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-/* ----- */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-inter: 'Inter';
-  --font-roboto-mono: 'Roboto Mono';
+  /* Light Mode: White + Blue Accents */
+  --background: 255 255 255;    /* #FFFFFF */
+  --foreground: 33 37 41;       /* #212529 */
+  
+  --card: 255 255 255;
+  --card-foreground: 33 37 41;
+  
+  --primary: 30 136 255;        /* #1E88FF - Accent Blue */
+  --primary-foreground: 255 255 255;
+  
+  --muted: 243 244 246;
+  --muted-foreground: 107 114 128; /* #6B7280 */
+  
+  --accent: 239 246 255;
+  --accent-foreground: 30 136 255;
 
-  /* Light Theme */
-  --background: 248 249 250; /* #F8F9FA */
-  --foreground: 33 37 41; /* #212529 */
-  --card: 255 255 255; /* #FFFFFF */
-  --card-foreground: 33 37 41; /* #212529 */
-  --primary: 0 123 255; /* #007BFF */
-  --primary-foreground: 255 255 255; /* #FFFFFF */
+  --grid-color: rgba(0, 0, 0, 0.05);
 }
 
 .dark {
-  /* Dark Theme */
-  --background: 13 17 23; /* #0D1117 */
-  --foreground: 201 209 217; /* #C9D1D9 */
-  --card: 22 27 34; /* #161B22 */
-  --card-foreground: 201 209 217; /* #C9D1D9 */
-  --primary: 88 166 255; /* #58A6FF */
-  --primary-foreground: 13 17 23; /* #0D1117 */
+  /* Dark Mode: Deep Black + Bluish Tones */
+  --background: 5 6 8;          /* #050608 - Near Black */
+  --foreground: 226 232 240;    /* #E2E8F0 */
+  
+  --card: 11 18 33;             /* #0B1221 - Deep Blue Tone */
+  --card-foreground: 226 232 240;
+  
+  --primary: 30 136 255;        /* #1E88FF */
+  --primary-foreground: 255 255 255;
+  
+  --muted: 15 23 42;
+  --muted-foreground: 156 163 175; /* #9CA3AF */
+  
+  --accent: 30 41 59;
+  --accent-foreground: 255 255 255;
+
+  --grid-color: rgba(30, 136, 255, 0.05);
 }
 
-body {
-  @apply bg-light-background text-light-foreground dark:bg-dark-background dark:text-dark-foreground;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: var(--font-inter), sans-serif;
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Modern scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40 transition-colors;
+  }
 }
 
-/* Glassmorphism utility */
-.glass-effect {
-  @apply bg-white/10 dark:bg-white/5 backdrop-blur-lg border border-white/20;
+@layer utilities {
+  .glass-effect {
+    @apply bg-white/70 dark:bg-[#0B1221]/70 backdrop-blur-md border border-black/5 dark:border-white/10;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500;
+  }
 }

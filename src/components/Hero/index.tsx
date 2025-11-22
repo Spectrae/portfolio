@@ -1,64 +1,61 @@
 // src/components/Hero/index.tsx
+import Link from 'next/link';
 import { FiGithub, FiLinkedin, FiTwitter, FiArrowDown } from 'react-icons/fi';
-
-const socials = [
-  { href: 'https://github.com/Spectrae', icon: FiGithub, label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/rickmondal2004/', icon: FiLinkedin, label: 'LinkedIn' },
-  { href: 'https://x.com/imrickmondal', icon: FiTwitter, label: 'Twitter' },
-];
+import { Button } from '@/components/ui/Button';
 
 const Hero = () => {
   return (
-    <section
-      id="home"
-      className="relative flex min-h-[80vh] flex-col items-center justify-center pt-24 text-center"
-    >
-      <h1 className="text-5xl font-bold md:text-7xl">
-        <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
-          Rick Mondal
-        </span>
-      </h1>
+    <section className="relative flex min-h-screen flex-col items-center justify-center px-4 pt-20 text-center">
+      <div className="animate-fade-in space-y-6 max-w-3xl mx-auto">
 
-      <p className="mt-4 text-xl text-light-foreground/80 dark:text-dark-foreground/80 md:text-2xl">
-        Full-Stack Developer
-      </p>
+        {/* Green Badge */}
+        <div className="inline-block rounded-full bg-green-500/10 px-4 py-1.5 text-sm font-medium text-green-400 ring-1 ring-green-500/20 mb-4">
+          Available for work
+        </div>
 
-      {/* BUTTONS */}
-      <div className="mt-8 flex flex-wrap justify-center gap-4">
-        <a
-          href="#projects"
-          className="rounded-full bg-light-primary px-6 py-3 font-semibold text-light-primary-foreground shadow-lg transition-transform hover:scale-105 dark:bg-dark-primary dark:text-dark-primary-foreground"
-        >
-          View My Work
-        </a>
+        <h1 className="text-5xl font-bold tracking-tight sm:text-7xl">
+          Hi, I'm <span className="text-gradient">Rick Mondal</span>
+        </h1>
+        
+        <p className="text-xl font-medium text-foreground/80 sm:text-2xl">
+          Full-Stack Developer
+        </p>
+        
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
+          I build accessible, pixel-perfect, and performant web experiences. 
+          Specializing in the React ecosystem, Systems Programming, and modern UI design.
+        </p>
 
-        <a
-          href="#contact"
-          className="rounded-full border border-light-primary bg-transparent px-6 py-3 font-semibold text-light-primary transition-transform hover:scale-105 hover:bg-light-primary/10 dark:border-dark-primary dark:text-dark-primary dark:hover:bg-dark-primary/10"
-        >
-          Contact Me
-        </a>
+        <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <Link href="#projects">
+            <Button size="lg">View Work</Button>
+          </Link>
+          <Link href="#contact">
+            <Button variant="outline" size="lg">Contact Me</Button>
+          </Link>
+        </div>
+
+        <div className="flex items-center justify-center gap-6 pt-8">
+          {[
+            { icon: FiGithub, href: 'https://github.com/Spectrae' },
+            { icon: FiLinkedin, href: 'https://linkedin.com/in/rickmondal2004' },
+            { icon: FiTwitter, href: 'https://twitter.com/imrickmondal' },
+          ].map((social, i) => (
+            <a
+              key={i}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-colors hover:text-primary hover:scale-110"
+            >
+              <social.icon size={24} />
+            </a>
+          ))}
+        </div>
       </div>
 
-      {/* SOCIALS */}
-      <div className="mt-8 flex gap-6">
-        {socials.map((social) => (
-          <a
-            key={social.label}
-            href={social.href}
-            aria-label={social.label}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-light-foreground/70 transition-colors hover:text-light-primary dark:text-dark-foreground/70 dark:hover:text-dark-primary"
-          >
-            <social.icon size={24} />
-          </a>
-        ))}
-      </div>
-
-      {/* BOUNCING ARROW */}
-      <div className="absolute bottom-10 animate-bounce">
-        <FiArrowDown size={24} className="text-light-foreground/50 dark:text-dark-foreground/50" />
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-muted-foreground">
+        <FiArrowDown size={24} />
       </div>
     </section>
   );

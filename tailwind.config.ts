@@ -2,7 +2,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  darkMode: 'class', // Using class strategy
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,72 +11,45 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        /**
-         * GLOBAL COLOR TOKENS (Fix for bg-gradient-to-r from-primary)
-         * -----------------------------------------------------------
-         * These tokens ensure components like Hero can use:
-         *   from-primary
-         *   to-primary
-         *   text-primary
-         */
-        primary: '#6366f1', // Indigo-500 (beautiful gradient-friendly)
-        'primary-foreground': '#ffffff',
-
-        /**
-         * LIGHT MODE PALETTE
-         */
-        light: {
-          background: '#F8F9FA',
-          foreground: '#212529',
-          card: '#FFFFFF',
-          'card-foreground': '#212529',
-          primary: '#007BFF',
-          'primary-foreground': '#FFFFFF',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+        primary: {
+          DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+          foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
         },
-
-        /**
-         * DARK MODE PALETTE
-         */
-        dark: {
-          background: '#0D1117',
-          foreground: '#C9D1D9',
-          card: '#161B22',
-          'card-foreground': '#C9D1D9',
-          primary: '#58A6FF',
-          'primary-foreground': '#0D1117',
+        card: {
+          DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+          foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
+        },
+        muted: {
+          DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+          foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
+        },
+        accent: {
+          DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+          foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
         },
       },
-
-      fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
-        mono: ['var(--font-roboto-mono)', 'monospace'],
+      borderRadius: {
+        '2xl': '1rem',
+        '3xl': '1.5rem',
       },
-
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out forwards',
-        'slide-in': 'slideIn 0.5s ease-out forwards',
-        'infinite-spin': 'spin 20s linear infinite',
-        'slow-pulse': 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'slide-up': 'slideUp 0.5s ease-out forwards',
       },
-
       keyframes: {
         fadeIn: {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        slideIn: {
-          '0%': { opacity: '0', transform: 'translateX(-20px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-      },
-
-      backdropBlur: {
-        xs: '2px',
       },
     },
   },
-
-  plugins: [require('tailwindcss-animate')],
+  plugins: [],
 };
-
 export default config;
