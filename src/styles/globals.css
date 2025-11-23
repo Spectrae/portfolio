@@ -1,56 +1,70 @@
 /* src/styles/globals.css */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Light and Dark theme tokens */
 :root {
-  /* Light Mode: White + Blue Accents */
-  --background: 255 255 255;    /* #FFFFFF */
-  --foreground: 33 37 41;       /* #212529 */
-  
+  --background: 255 255 255;
+  --foreground: 33 37 41;
+
   --card: 255 255 255;
   --card-foreground: 33 37 41;
-  
-  --primary: 30 136 255;        /* #1E88FF - Accent Blue */
+
+  --primary: 30 136 255;
   --primary-foreground: 255 255 255;
-  
+
   --muted: 243 244 246;
-  --muted-foreground: 107 114 128; /* #6B7280 */
-  
+  --muted-foreground: 107 114 128;
+
   --accent: 239 246 255;
   --accent-foreground: 30 136 255;
 
-  --grid-color: rgba(0, 0, 0, 0.05);
+  /* Grid – visible in light mode */
+  --grid-color: rgba(0, 0, 0, 0.06);
+
+  /* Glass effects */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(0, 0, 0, 0.10);
+
+  --card-glass-bg: rgba(255, 255, 255, 0.25);
+  --card-glass-border: rgba(0, 0, 0, 0.12);
 }
 
 .dark {
-  /* Dark Mode: Deep Black + Bluish Tones */
-  --background: 5 6 8;          /* #050608 - Near Black */
-  --foreground: 226 232 240;    /* #E2E8F0 */
-  
-  --card: 11 18 33;             /* #0B1221 - Deep Blue Tone */
+  --background: 5 6 8;
+  --foreground: 226 232 240;
+
+  --card: 11 18 33;
   --card-foreground: 226 232 240;
-  
-  --primary: 30 136 255;        /* #1E88FF */
+
+  --primary: 30 136 255;
   --primary-foreground: 255 255 255;
-  
+
   --muted: 15 23 42;
-  --muted-foreground: 156 163 175; /* #9CA3AF */
-  
+  --muted-foreground: 156 163 175;
+
   --accent: 30 41 59;
   --accent-foreground: 255 255 255;
 
-  --grid-color: rgba(30, 136, 255, 0.05);
+  /* Grid – stronger bluish tint for dark mode */
+  --grid-color: rgba(120, 160, 255, 0.12);
+
+  /* Glass in dark mode */
+  --glass-bg: rgba(20, 25, 35, 0.18);
+  --glass-border: rgba(255, 255, 255, 0.10);
+
+  --card-glass-bg: rgba(20, 25, 35, 0.18);
+  --card-glass-border: rgba(120, 160, 255, 0.12);
 }
 
+/* Base styles */
 @layer base {
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  
-  /* Modern scrollbar */
+
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -58,15 +72,36 @@
     @apply bg-background;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40 transition-colors;
+    @apply bg-muted-foreground/20 rounded-full transition-colors hover:bg-muted-foreground/40;
   }
 }
 
+/* Utility classes */
 @layer utilities {
+  /* Soft translucent blur for UI sections */
   .glass-effect {
-    @apply bg-white/70 dark:bg-[#0B1221]/70 backdrop-blur-md border border-black/5 dark:border-white/10;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
   }
-  
+
+  /* Subtle blur for cards (Toolkit section) */
+  .card-glass {
+    background: var(--card-glass-bg);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid var(--card-glass-border);
+  }
+
+  /* Very soft shadow */
+  .soft-shadow {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .dark .soft-shadow {
+    box-shadow: 0 4px 12px rgba(30,136,255,0.05);
+  }
+
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500;
   }
