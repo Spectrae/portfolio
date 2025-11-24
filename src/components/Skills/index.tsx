@@ -31,6 +31,7 @@ const skillCategories: SkillCategory[] = [
       { name: 'Node.js', icon: 'nodejs.svg' },
       { name: 'Rust', icon: 'rust.svg' },
       { name: 'C / C++', icon: 'c.svg' },
+      { name: 'Go', icon: 'Go.svg' },
       { name: 'Linux', icon: 'linux.svg' },
       { name: 'Docker', icon: 'docker.svg' },
     ],
@@ -43,6 +44,7 @@ const skillCategories: SkillCategory[] = [
       { name: 'Git', icon: 'git.svg' },
       { name: 'Jest', icon: 'jest.svg' },
       { name: 'Playwright', icon: 'playwright.svg' },
+      { name: 'Kubernetes', icon: 'kubernetes.svg' },
     ],
   },
   {
