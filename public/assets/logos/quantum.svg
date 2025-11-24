@@ -1,7 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <circle cx="64" cy="64" r="58" fill="none" stroke="#9C27B0" stroke-width="8"/>
-  <ellipse cx="64" cy="64" rx="20" ry="58" fill="none" stroke="#9C27B0" stroke-width="4" transform="rotate(45 64 64)"/>
-  <ellipse cx="64" cy="64" rx="20" ry="58" fill="none" stroke="#9C27B0" stroke-width="4" transform="rotate(-45 64 64)"/>
-  <circle cx="64" cy="64" r="8" fill="#9C27B0"/>
-  <style>@media (prefers-color-scheme: dark) { circle, ellipse { stroke: #D1C4E9; } circle[fill] { fill: #D1C4E9; } }</style>
-</svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<style>.cls-1{fill:#aecbfa;}.cls-2{fill:#4285f4;}.cls-3{fill:#669df6;}</style>
+</defs>
+<title>Icon_24px_QuantamEngine_Color</title>
+<g data-name="Product Icons">
+<rect class="cls-1" x="7.01" y="2" width="2" height="3"/>
+<rect class="cls-1" x="11.01" y="2" width="2" height="3"/>
+<rect class="cls-1" x="15.01" y="2" width="2" height="3"/>
+<rect class="cls-2" x="7.01" y="19" width="2" height="3"/>
+<rect class="cls-2" x="11.01" y="19" width="2" height="3"/>
+<rect class="cls-2" x="15.01" y="19" width="2" height="3"/>
+<rect class="cls-2" x="19" y="15" width="3" height="2"/>
+<rect class="cls-2" x="19" y="11" width="3" height="2"/>
+<rect class="cls-2" x="19" y="7" width="3" height="2"/>
+<rect class="cls-1" x="2" y="15" width="3" height="2"/>
+<rect class="cls-1" x="2" y="11" width="3" height="2"/>
+<rect class="cls-1" x="2" y="7" width="3" height="2"/>
+<g data-name="colored-32/quantum-engine">
+<g >
+<path class="cls-3" d="M11,13H9V7H7v8h4v3h2V15h4V7H15v6H13V6H11ZM4,20V4H20V20Z"/>
+</g>
+</g>
+</g>
+</svg>
